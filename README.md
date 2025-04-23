@@ -41,6 +41,39 @@ The game dynamically updates the score, provides color-coded feedback based on t
 ## Screenshot
 ![Game Screenshot](Screenshots/Screenshot.png)
 
+## Flowchart of the Game Logic
+```mermaid
+flowchart TD
+    Start(["Start Program"]) --> InitSeed["Initialize Random Seed with time"]
+    InitSeed --> StartGame["Start The Game"]
+    StartGame --> LoopGame{"Play Again?"}
+    LoopGame -- Yes --> Clear["Clear Screen"]
+    Clear --> ColorStart["Set Initial Color"]
+    ColorStart --> Welcome["Display Welcome Message"]
+    Welcome --> NewGame["Start New Game"]
+    NewGame --> ReadRounds["Read Number of Rounds"]
+    ReadRounds --> LoopRounds["Repeat for each Round"]
+
+    LoopRounds --> RoundStart["Round i"]
+    RoundStart --> PlayerChoice["Read Player's Choice"]
+    PlayerChoice --> CompChoice["Generate Computer's Choice"]
+    CompChoice --> PrintChoices["Display Both Choices"]
+    PrintChoices --> DecideWinner["Decide Round Winner"]
+    DecideWinner --> SetColorRes["Set Color Based on Result"]
+    SetColorRes --> ShowScore["Print Current Score"]
+    ShowScore --> LoopRounds
+
+    LoopRounds --> FinalScore["Print Final Score"]
+    FinalScore --> AnnounceWinner["Announce Final Result"]
+    AnnounceWinner --> LoopGame
+    LoopGame -- No --> End(["End Program"])
+
+    %% Custom shapes for special blocks
+    DecideWinner@{ shape: rect }
+    SetColorRes@{ shape: rect }
+    AnnounceWinner@{ shape: rect }
+```
+
 ## Learning Objectives
 This project was developed to improve the following skills:
 - Designing clean and intuitive console-based UIs
